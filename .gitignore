@@ -1,0 +1,7 @@
+.idea/
+
+*.gitkeep
+
+docker
+Dockerfile
+docker-compose.yml
