@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  database:
+    image: mysql:5.5
+    volumes:
+      - database_data:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: turma3
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+
+  php:
+    build: "."
+    ports:
+      - "80:80"
+    volumes:
+      - "./:/var/www/html"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - PMA_HOST=database
+     - PMA_USER=admin
+     - PMA_PASSWORD=root
+    restart: always
+    ports:
+     - 8080:80
+
+volumes:
+  database_data:
